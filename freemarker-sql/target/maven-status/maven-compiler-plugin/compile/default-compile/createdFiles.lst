@@ -1,0 +1,4 @@
+com\biostime\sqlManage\freemarker\FreeMakerContext.class
+com\biostime\sqlManage\Sqls.class
+com\biostime\sqlManage\freemarker\FreeMarkerBuilder.class
+com\biostime\sqlManage\freemarker\FreeMarkerException.class

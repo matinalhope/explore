@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 公共 -->
+<!-- sql key格式可以：类名.方法名   有需要可以再细分： 类名.方法名.功能名称-->
+<sqls xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.btboys.com/sqls.xsd">
+	<sql key="common.chooseDataSource">
+		<![CDATA[
+			SELECT A.DATASOURCE_ID, B.DATASOURCE_TYPE_NAME,D.VENDOR_NAME,F.SPECILITY_NAME,A.DATASOURCE_NAME,A.PROTOCOL_TYPE,A.STATUS FROM S_DATASOURCE_INFO A 
+			LEFT OUTER JOIN S_DATASOURCE_TYPE B ON A.DATASOURCE_TYPE_ID = B.DATASOURCE_TYPE_ID 
+			LEFT OUTER JOIN S_VENDOR D ON A.VENDOR_ID = D.VENDOR_ID 
+			LEFT OUTER JOIN S_SPECILITY F ON A.SPECILITY_ID = F.SPECILITY_ID
+			WHERE NOT EXISTS (SELECT 1 FROM S_AREA_DATASOURCE H WHERE H.DATASOURCE_ID = A.DATASOURCE_ID)
+			<#if datasourceName??>
+				AND  A.DATASOURCE_NAME LIKE :datasourceName
+			</#if>
+		]]>
+	</sql>
+	
+	<sql key="common.chooseCollector">
+		<![CDATA[
+			SELECT B.COLLECTOR_ID,B.COLLECTOR_CODE,B.COLLECTOR_IP,B.MAC,B.COLLECTOR_CPU,B.COLLECTOR_MEM,B.COLLECTOR_DESC FROM S_COLLECTOR B
+ 			WHERE COLLECTOR_ID NOT IN(SELECT COLLECTOR_ID FROM S_COLLECTOR_AREA WHERE AREA_ID = :areaId)
+			<#if collectorCode??>
+				AND  B.COLLECTOR_CODE LIKE :collectorCode
+			</#if>
+		]]>
+	</sql>
+	
+	<sql key="common.chooseDataItem">
+		<![CDATA[
+			SELECT C.DATA_ID,C.DATA_CODE,C.NAME,C.DATA_DESC,C.TYPE,C.MAX_VALUE,C.MIN_VALUE,C.UNIT,C.IS_NULLABLE,C.DEFAULT_VALUE FROM S_DATA_CONFIG C 
+			WHERE NOT EXISTS (SELECT DATA_ID FROM S_DATASET_RELATION B WHERE DATASET_ID = :datasetId AND C.DATA_ID = B.DATA_ID)
+			<#if name??>
+				AND  C.NAME LIKE :name
+			</#if>
+		]]>
+	</sql>
+</sqls>
