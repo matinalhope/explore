@@ -13,3 +13,5 @@ hs_err_pid*
 /freemarker-sql/.classpath
 /freemarker-sql/.project
 /freemarker-sql/.settings
+/freemarker-sql/target
+/freemarker-sql/test-output
