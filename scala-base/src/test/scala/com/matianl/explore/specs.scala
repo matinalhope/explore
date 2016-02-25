@@ -1,4 +1,4 @@
-package samples
+package com.matianl.explore
 
 import org.junit.runner.RunWith
 import org.specs2.mutable._

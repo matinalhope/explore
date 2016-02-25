@@ -1,4 +1,4 @@
-package samples
+package com.matianl.explore
 
 import org.junit._
 import Assert._
