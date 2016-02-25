@@ -10,8 +10,9 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
-/freemarker-sql/.classpath
-/freemarker-sql/.project
-/freemarker-sql/.settings
-/freemarker-sql/target
-/freemarker-sql/test-output
+*.cache-main
+*.cache-tests
+*.classpath
+*.project
+.settings
+*/target/*
