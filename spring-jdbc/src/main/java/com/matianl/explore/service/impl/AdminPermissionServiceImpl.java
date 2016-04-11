@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.matianl.explore.repository.AdminPermissionDao;
 import com.matianl.explore.service.AdminPermissionService;
@@ -16,6 +17,7 @@ public class AdminPermissionServiceImpl implements AdminPermissionService {
 	private AdminPermissionDao adminPermissionDao;
 	
 	@Override
+	@Transactional
 	public List<Map<String, Object>> list(List<Integer> ids) {
 		return adminPermissionDao.list(ids);
 	}
