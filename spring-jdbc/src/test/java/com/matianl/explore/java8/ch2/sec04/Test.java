@@ -20,6 +20,7 @@ public class Test {
    }
 
    public static Stream<Character> characterStream(String s) {
+	   
       List<Character> result = new ArrayList<>();
       for (char c : s.toCharArray()) result.add(c);
       return result.stream();

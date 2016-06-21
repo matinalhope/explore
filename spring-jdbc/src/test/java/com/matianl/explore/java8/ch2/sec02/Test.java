@@ -23,7 +23,7 @@ public class Test {
    }
 
    public static void main(String[] args) throws IOException {
-      Path path = Paths.get("../alice.txt");
+      Path path = Paths.get("D:/GitRpy/Mine/explore/spring-jdbc/src/test/java/com/matianl/explore/java8/ch2/alice.txt");
       String contents = new String(Files.readAllBytes(path), StandardCharsets.UTF_8);
         
       Stream<String> words = Stream.of(contents.split("[\\P{L}]+"));

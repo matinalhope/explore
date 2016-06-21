@@ -39,34 +39,34 @@ public class Test {
       }
 
       Integer[] numbers3 = Stream.iterate(0, n -> n + 1).limit(10).toArray(Integer[]::new);
-      System.out.println(numbers3); // Note it's an Integer[] array
+      System.out.println("numbers3: " + numbers3); // Note it's an Integer[] array
 
       HashSet<String> noVowelHashSet
-         = noVowels("../alice.txt").collect(HashSet::new, HashSet::add, HashSet::addAll);
+         = noVowels("D:/GitRpy/Mine/explore/spring-jdbc/src/test/java/com/matianl/explore/java8/ch2/alice.txt").collect(HashSet::new, HashSet::add, HashSet::addAll);
 
       show("noVowelHashSet", noVowelHashSet);
 
       Set<String> noVowelSet
-         = noVowels("../alice.txt").collect(Collectors.toSet());
+         = noVowels("D:/GitRpy/Mine/explore/spring-jdbc/src/test/java/com/matianl/explore/java8/ch2/alice.txt").collect(Collectors.toSet());
       show("noVowelSet", noVowelSet);
 
       TreeSet<String> noVowelTreeSet
-         = noVowels("../alice.txt").collect(Collectors.toCollection(TreeSet::new));
+         = noVowels("D:/GitRpy/Mine/explore/spring-jdbc/src/test/java/com/matianl/explore/java8/ch2/alice.txt").collect(Collectors.toCollection(TreeSet::new));
       show("noVowelTreeSet", noVowelTreeSet);
 
-      String result = noVowels("../alice.txt").limit(10).collect(Collectors.joining());
+      String result = noVowels("D:/GitRpy/Mine/explore/spring-jdbc/src/test/java/com/matianl/explore/java8/ch2/alice.txt").limit(10).collect(Collectors.joining());
       System.out.println(result);
-      result = noVowels("../alice.txt").limit(10).collect(Collectors.joining(", "));
+      result = noVowels("D:/GitRpy/Mine/explore/spring-jdbc/src/test/java/com/matianl/explore/java8/ch2/alice.txt").limit(10).collect(Collectors.joining(", "));
       System.out.println(result);
 
-      IntSummaryStatistics summary = noVowels("../alice.txt").collect(
+      IntSummaryStatistics summary = noVowels("D:/GitRpy/Mine/explore/spring-jdbc/src/test/java/com/matianl/explore/java8/ch2/alice.txt").collect(
          Collectors.summarizingInt(String::length));
       double averageWordLength = summary.getAverage();      
       double maxWordLength = summary.getMax();
       System.out.println("Average word length: " + averageWordLength);
       System.out.println("Max word length: " + maxWordLength);
 
-      noVowels("../alice.txt").limit(10).forEach(System.out::println);
+      noVowels("D:/GitRpy/Mine/explore/spring-jdbc/src/test/java/com/matianl/explore/java8/ch2/alice.txt").limit(10).forEach(System.out::println);
    }
 }
 

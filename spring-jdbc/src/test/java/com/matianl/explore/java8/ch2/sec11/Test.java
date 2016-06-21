@@ -30,6 +30,9 @@ public class Test {
 
    public static void main(String[] args) throws IOException {
       Stream<Locale> locales = Stream.of(Locale.getAvailableLocales());
+      locales.forEach(s -> System.out.println(s.getCountry() + " : " + s));
+      
+      locales = Stream.of(Locale.getAvailableLocales());
       Map<String, List<Locale>> countryToLocales = locales.collect(
          Collectors.groupingBy(Locale::getCountry));
       System.out.println("Swiss locales: " + countryToLocales.get("CH"));   
@@ -49,12 +52,12 @@ public class Test {
          groupingBy(Locale::getCountry, counting()));
       System.out.println("countryToLocaleCounts: " + countryToLocaleCounts);   
 
-      Stream<City> cities = readCities("cities.txt");
+      Stream<City> cities = readCities("D:/GitRpy/Mine/explore/spring-jdbc/src/test/java/com/matianl/explore/java8/ch2/sec11/cities.txt");
       Map<String, Integer> stateToCityPopulation = cities.collect(
          groupingBy(City::getState, summingInt(City::getPopulation)));
       System.out.println("stateToCityPopulation: " + stateToCityPopulation);
 
-      cities = readCities("cities.txt");
+      cities = readCities("D:/GitRpy/Mine/explore/spring-jdbc/src/test/java/com/matianl/explore/java8/ch2/sec11/cities.txt");
       Map<String, Optional<String>> stateToLongestCityName = cities.collect(
          groupingBy(City::getState, 
             mapping(City::getName,
@@ -69,19 +72,19 @@ public class Test {
                toSet())));
       System.out.println("countryToLanguages: " + countryToLanguages);   
 
-      cities = readCities("cities.txt");
+      cities = readCities("D:/GitRpy/Mine/explore/spring-jdbc/src/test/java/com/matianl/explore/java8/ch2/sec11/cities.txt");
       Map<String, IntSummaryStatistics> stateToCityPopulationSummary = cities.collect(
          groupingBy(City::getState,
             summarizingInt(City::getPopulation)));
       System.out.println(stateToCityPopulationSummary.get("NY"));
 
-      cities = readCities("cities.txt");
+      cities = readCities("D:/GitRpy/Mine/explore/spring-jdbc/src/test/java/com/matianl/explore/java8/ch2/sec11/cities.txt");
       Map<String, String> stateToCityNames = cities.collect(
          groupingBy(City::getState,
             reducing("", City::getName,
                (s, t) -> s.length() == 0 ? t : s + ", " + t)));
 
-      cities = readCities("cities.txt");
+      cities = readCities("D:/GitRpy/Mine/explore/spring-jdbc/src/test/java/com/matianl/explore/java8/ch2/sec11/cities.txt");
       stateToCityNames = cities.collect(
          groupingBy(City::getState,
             mapping(City::getName,

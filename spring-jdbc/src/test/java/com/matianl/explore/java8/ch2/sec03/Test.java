@@ -28,7 +28,7 @@ public class Test {
 
    public static void main(String[] args) throws IOException {
       String contents = new String(Files.readAllBytes(
-            Paths.get("../alice.txt")), StandardCharsets.UTF_8);
+            Paths.get("D:/GitRpy/Mine/explore/spring-jdbc/src/test/java/com/matianl/explore/java8/ch2/alice.txt")), StandardCharsets.UTF_8);
       List<String> wordList = Arrays.asList(contents.split("[\\P{L}]+"));
       Stream<String> words = wordList.stream();
       Stream<String> longWords = words.filter(w -> w.length() > 12);
