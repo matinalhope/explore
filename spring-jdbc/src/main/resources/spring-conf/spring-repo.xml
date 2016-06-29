@@ -13,13 +13,24 @@
         http://www.springframework.org/schema/aop
         http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-	<context:property-placeholder location="${runtime.env}/jdbc.properties" />
-	
-	<import resource="spring-repo.xml" />
-	<import resource="spring-ehcache.xml" />
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="driverClass" value="${jdbc.driverClassName}" />
+		<property name="jdbcUrl" value="${jdbc.url}" />
+		<property name="user" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
 
-	<context:component-scan base-package="com.matianl.explore.repository" />
-	<context:component-scan base-package="com.matianl.explore.service" />
+	<bean id="baseDao" class="com.matianl.explore.repository.base.SpringJdbcDao">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<tx:annotation-driven transaction-manager="txManager" />
+	<bean id="txManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
 
 
 </beans>

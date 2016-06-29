@@ -20,12 +20,15 @@ public class App {
 
 	public static void main(String[] args) {
 		AbstractApplicationContext ctx = new ClassPathXmlApplicationContext("spring-conf/applicationContext.xml");
+		ctx.registerShutdownHook();
+		testList(ctx);
+		log.info("---------------------------------------------------------");
 		testList(ctx);
 	}
 
 	private static void testList(AbstractApplicationContext ctx) {
-		AdminPermissionService bean2 = ctx.getBean(AdminPermissionService.class);
-		List<Map<String, Object>> list = bean2.list(Arrays.asList(-1));
+		AdminPermissionService bean = ctx.getBean(AdminPermissionService.class);
+		List<Map<String, Object>> list = bean.list(Arrays.asList(-1));
 		log.info("list result: {}", list);
 	}
 }
