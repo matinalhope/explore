@@ -14,18 +14,16 @@ import com.matianl.explore.repository.AdminPermissionDao;
 
 @Service
 public class AdminPermissionService {
-	
+
 	private static final Logger log = LoggerFactory.getLogger(AdminPermissionService.class);
 
 	@Autowired
 	private AdminPermissionDao adminPermissionDao;
-	
-	@Transactional(readOnly=true)
+
+	@Transactional(readOnly = true)
 	@Cacheable(value = "oneDayCache", key = "#ids + 'list'")
 	public List<Map<String, Object>> list(List<Integer> ids) {
-		log.info("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
 		return adminPermissionDao.list(ids);
 	}
-	
-}
 
+}
