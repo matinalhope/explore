@@ -27,5 +27,7 @@ public class UpdatingValues {
       map.merge(word, 1L, (existingValue, newValue2) -> existingValue + newValue2);
 
       map.merge(word, 1L, Long::sum);
+      
+      System.out.println(map);
    }
 }
