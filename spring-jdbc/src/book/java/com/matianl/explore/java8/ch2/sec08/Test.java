@@ -26,14 +26,32 @@ public class Test {
       Integer sum3 = values.reduce(0, (x, y) -> x + y);
       System.out.println("sum3: " + sum3);
 
-      String contents = new String(Files.readAllBytes(
-            Paths.get("D:/GitRpy/Mine/explore/spring-jdbc/src/test/java/com/matianl/explore/java8/ch2/alice.txt")), StandardCharsets.UTF_8);
-      List<String> wordList = Arrays.asList(contents.split("[\\P{L}]+"));
+//      String contents = new String(Files.readAllBytes(
+//            Paths.get("D:/GitRpy/Mine/explore/spring-jdbc/src/test/java/com/matianl/explore/java8/ch2/alice.txt")), StandardCharsets.UTF_8);
+//      List<String> wordList = Arrays.asList(contents.split("[\\P{L}]+"));
+      
+      List<String> wordList = Arrays.asList("abc","defg","hijkl");
       Stream<String> words = wordList.stream();
         
-      int result = words.reduce(0, 
+      String result2 = wordList.stream().reduce((x, y) -> x.concat(y)).orElse("");
+//      String result2 = wordList.stream().reduce((x, y) -> x.concat(",").concat(y)).get();
+      
+      System.out.println("result2: " + result2);
+      
+     /* int result = words.reduce(0, 
          (s, w) -> s + w.length(), 
-         (s1, s2) -> s1 + s2);
+         (s1, s2) -> s1 + s2);*/
+      
+      int result = words
+    		  		.parallel()//去掉效果不一样
+    		  		.reduce(0, (s, w) -> {
+	    	        	 int i = s + w.length();
+	    	        	 System.out.println("log: " + s + " , " + w + " , " + i);
+	    	        	 return i;
+    		  		}, (s1, s2) -> {
+	    	        	 System.out.println("log2: " + s1 + " , " + s2);
+	    	        	 return s1 + s2; 
+    		  		});
 
       System.out.println("result: " + result);
    }
